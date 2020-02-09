@@ -3,14 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 // Adapted & Translated from mourner/suncalc: https://github.com/mourner/suncalc/blob/master/suncalc.js
 
 public class DaytimeBehaviorScript : MonoBehaviour
 {
-    public int hourOffset = 14;
+    public int hour = 12;
     public GameObject target;
+
+    public Slider slider;
 
     private DateTime date;
     private double currentAzimuth;
@@ -31,7 +34,9 @@ public class DaytimeBehaviorScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.Date = DateTime.Now.AddHours(hourOffset);
+        var current = DateTime.Now;
+
+        this.Date = current.AddHours(hour - current.Hour);
         Debug.Log(this.date.TimeOfDay.ToString());
 
         Debug.Log("Azimuth " + this.currentAzimuth * 180 / Math.PI);
@@ -41,7 +46,17 @@ public class DaytimeBehaviorScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.Date = this.Date.AddMinutes(1);
+        //this.Date = this.Date.AddMinutes(1);
+    }
+
+    public void UpdateHour()
+    {
+        float hour = slider.value;
+        var current = date;
+
+        this.Date = current.AddHours(hour - current.Hour);
+
+        //lightPrefab.transform.GetChild(1).GetComponent<Light>().intensity = hour < 7 || hour > 17 ? 0.8f : 0;
     }
 
     private DateTime Date
@@ -63,7 +78,9 @@ public class DaytimeBehaviorScript : MonoBehaviour
             float Z = R * (float)(Math.Cos(currentAltitude) * Math.Sin(currentAzimuth));
             float Y = R * (float)(Math.Sin(currentAltitude));
 
-            // gameObject.GetComponent<Light>().intensity = currentAltitude < 0 ? 0 : 2 * (float)(currentAltitude / (Math.PI / 2));
+            gameObject.GetComponent<Light>().intensity = 0.1f + (
+                currentAltitude < 0 ? 0 : 2 * (float)(currentAltitude / (Math.PI / 2))
+            );
             gameObject.transform.position = new Vector3(X, Y, -Z) + target.transform.position;
             gameObject.transform.LookAt(target.transform.position);
         }
