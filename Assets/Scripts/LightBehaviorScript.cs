@@ -19,7 +19,7 @@ public class LightBehaviorScript : MonoBehaviour
 
     public void UpdateHour()
     {
-        int hour = (int)slider.value;
+        float hour = slider.value;
 
         float lightLevel = hour < 7 || hour > 17 ? 0.8f : 0;
 
