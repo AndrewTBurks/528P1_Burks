@@ -10,7 +10,6 @@ using UnityEngine.UI;
 
 public class DaytimeBehaviorScript : MonoBehaviour
 {
-    public int hour = 12;
     public GameObject target;
 
     public Slider slider;
@@ -34,6 +33,7 @@ public class DaytimeBehaviorScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        float hour = slider.value;
         var current = DateTime.Now;
 
         this.Date = current.AddHours(hour - current.Hour);
@@ -51,8 +51,8 @@ public class DaytimeBehaviorScript : MonoBehaviour
 
     public void UpdateHour()
     {
-        float hour = slider.value;
         var current = date;
+        float hour = slider.value;
 
         this.Date = current.AddHours(hour - current.Hour);
 

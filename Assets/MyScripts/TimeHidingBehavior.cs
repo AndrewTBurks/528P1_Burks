@@ -13,7 +13,7 @@ public class TimeHidingBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        UpdateHour();
     }
 
     // Update is called once per frame
@@ -27,7 +27,6 @@ public class TimeHidingBehavior : MonoBehaviour
         float hour = slider.value;
 
         bool isActive = (hour > activeStartHour && hour < activeEndHour) || (activeStartHour > activeEndHour && (hour > activeStartHour || hour < activeEndHour));
-        Debug.Log(hour + " " + isActive);
 
         foreach (GameObject go in objects)
         {

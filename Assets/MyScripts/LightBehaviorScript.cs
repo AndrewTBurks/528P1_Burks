@@ -9,7 +9,7 @@ public class LightBehaviorScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        UpdateHour();
     }
 
     // Update is called once per frame
