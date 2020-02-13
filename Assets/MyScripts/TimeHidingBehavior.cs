@@ -26,7 +26,8 @@ public class TimeHidingBehavior : MonoBehaviour
     {
         float hour = slider.value;
 
-        bool isActive = (hour > activeStartHour && hour < activeEndHour) || (activeStartHour > activeEndHour && (hour > activeStartHour || hour < activeEndHour));
+        bool isActive = (hour >= activeStartHour && hour < activeEndHour) || (activeStartHour > activeEndHour && (hour >= activeStartHour || hour < activeEndHour));
+        Debug.Log(activeStartHour + "-" + activeEndHour + ": " + isActive);
 
         foreach (GameObject go in objects)
         {
