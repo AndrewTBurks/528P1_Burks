@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GrillInteractionBehavior : MonoBehaviour
+public class GrillInteractionBehavior : CAVE2Interactable
 {
     public GameObject lid;
     public Transform openPosition;
@@ -16,6 +16,7 @@ public class GrillInteractionBehavior : MonoBehaviour
 
     public bool isOn = false;
     public CAVE2.Button triggerButton;
+    public GameObject player;
 
     // Start is called before the first frame update
     void Start()
@@ -57,15 +58,16 @@ public class GrillInteractionBehavior : MonoBehaviour
 
     public void OnWandButtonDown(CAVE2.WandEvent evt)
     {
-        //CAVE2PlayerIdentity playerID = evt.playerID;
+        CAVE2PlayerIdentity playerID = evt.playerID;
         //int wandID = evt.wandID;
         CAVE2.Button button = evt.button;
         //CAVE2.InteractionType interactionType = evt.interactionType;
 
+        Debug.Log(playerID);
 
         //Debug.Log("OnWandButtonDown: " + playerID.name + " " + wandID + " " + button);
 
-        if (button == triggerButton)
+        if (button == triggerButton && Vector3.Distance(player.transform.position, transform.position) < 10)
         {
             isOn = !isOn;
 

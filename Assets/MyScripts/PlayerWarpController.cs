@@ -22,7 +22,8 @@ public class PlayerWarpController : MonoBehaviour
     public void JumpTo(GameObject loc)
     {
         player.transform.position = loc.transform.position;
-        player.transform.Find("CAVE2-CameraController").transform.rotation = loc.transform.rotation;
+        player.transform.rotation = loc.transform.rotation;
+
         Debug.Log("Jump to:" + loc.transform.position);
     }
 }

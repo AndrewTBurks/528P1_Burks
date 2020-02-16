@@ -5,13 +5,18 @@ using UnityEngine;
 public class SpinklerSwitchBehavior : CAVE2Interactable
 {
     public SprinklerBehavior targetScript;
-    private bool isOn;
+    private bool isOn = false;
     public CAVE2.Button triggerButton;
+
+    public Light onLight;
+    public Light offLight;
+
+    public GameObject player;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        UpdateItems();
     }
 
     // Update is called once per frame
@@ -31,15 +36,24 @@ public class SpinklerSwitchBehavior : CAVE2Interactable
 
         Debug.Log("OnWandButtonDown: " + playerID.name + " " + wandID + " " + button);
 
-        if (button == triggerButton)
+        if (button == triggerButton && Vector3.Distance(player.transform.position, transform.position) < 10)
         {
             isOn = !isOn;
 
-            targetScript.setSprinklerState(isOn);
+            UpdateItems();
         }
 
 
         //Debug.Log("OnWandButtonDown: ");
         //Debug.Log(evt);
+    }
+
+    private void UpdateItems()
+    {
+        targetScript.setSprinklerState(isOn);
+
+        onLight.enabled = isOn;
+        offLight.enabled = !isOn;
+
     }
 }

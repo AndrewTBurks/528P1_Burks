@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5331120286234929769}
   - component: {fileID: 5078404551928492699}
   - component: {fileID: 7910556299508006413}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SpatialAudioTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
